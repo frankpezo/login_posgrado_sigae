@@ -115,6 +115,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                       if (value!.isEmpty) {
                                         return 'Por favor, ingrese su correo electrónico';
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(13),

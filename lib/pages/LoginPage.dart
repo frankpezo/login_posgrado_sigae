@@ -120,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                                       if (value!.isEmpty) {
                                         return 'Por favor, ingrese su correo electrónico';
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(13),
@@ -157,6 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                       if (value!.isEmpty) {
                                         return 'Por favor, ingrese su contraseña';
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(13),

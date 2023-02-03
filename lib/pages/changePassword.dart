@@ -14,6 +14,29 @@ class _ChangePasswordState extends State<ChangePassword> {
   bool obscurePassword = true;
   bool obscurePasswordDos = true;
 
+  //SnackBar
+  void showSnackBar(String title) {
+    final snackBar = SnackBar(
+      backgroundColor: Color.fromARGB(255, 42, 226, 137),
+      content: Text(
+        title,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      duration: Duration(seconds: 20),
+      action: SnackBarAction(
+        textColor: Color.fromARGB(255, 255, 255, 255),
+        label: 'Click aquí',
+        onPressed: (() {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
+        }),
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,6 +142,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       if (value!.isEmpty) {
                                         return 'Por favor, ingrese la nueva contraseña';
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(13),
@@ -170,6 +194,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                           passwordControllerDos.text) {
                                         return 'Las contraseña no coincide';
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(13),
@@ -210,12 +235,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       if (formKeyTres.currentState!
                                           .validate()) {
                                         //1.1. Aquí colocaremos para que nos redirecciones a otra parte
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()),
-                                        );
+                                        showSnackBar(
+                                            'Se cambió la contraseña correctamente');
                                       }
                                     });
                                   },
