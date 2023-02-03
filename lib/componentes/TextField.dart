@@ -5,12 +5,13 @@ class MyTextField extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
-
+  final TextInputType textType;
   const MyTextField(
       {Key? key,
       this.controller,
       required this.hintText,
-      required this.obscureText})
+      required this.obscureText,
+      required this.textType})
       : super(key: key);
 
   @override
@@ -22,10 +23,12 @@ class MyTextField extends StatelessWidget {
       ),
       width: 330,
       height: 45,
+      padding: const EdgeInsets.only(top: 3, left: 15),
       child: TextField(
         //2. Para acceder
         controller: this.controller,
         obscureText: this.obscureText,
+        keyboardType: textType,
         decoration: InputDecoration(
           enabledBorder:
               OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),

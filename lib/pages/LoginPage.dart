@@ -11,51 +11,113 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[40],
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
+      backgroundColor: Colors.grey[300],
+      body: Container(
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          child: SafeArea(
             child: Container(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 100,
-                  ),
-                  //1. Logo
-                  Image.asset("assets/images/cubo.png"),
-                  //2. Bievenido
-                  Text(
-                    'Iniciar Sesión',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  Text('Para acceder a Tramite documentario'),
-                  //3. Usuario campo
-                  MyTextField(
-                    controller: userNameController,
-                    hintText: 'Usuario',
-                    obscureText: false,
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  //4. Contraseña campo
-                  MyTextField(
-                    controller: passwordController,
-                    hintText: 'Contraseña',
-                    obscureText: true, //Para que la contraseña no se pueda ver
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  //5. Boton iniciar sesción
-                  BotonLogin(),
-                  //6. No se acuerda contraseña
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Text(
-                    '¿Olvidó la contraseña?',
-                    style: TextStyle(color: Colors.blueAccent),
+                  Container(
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(2)),
+                      margin: EdgeInsets.all(15),
+                      elevation: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 40, left: 10, right: 10),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 50,
+                              ),
+                              //1. Logo
+
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(top: 3, right: 195),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/cubo.png",
+                                      width: 45,
+                                      height: 43,
+                                    ),
+                                    Text(
+                                      'SIGAE',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 33, 85, 175),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 23),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              //2. Bievenido
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(top: 3, right: 55),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Iniciar Sesión',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                    Text('Para acceder a Tramite documentario'),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              //3. Usuario campo
+                              MyTextField(
+                                controller: userNameController,
+                                hintText: 'Usuario',
+                                obscureText: false,
+                                textType: TextInputType.emailAddress,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              //4. Contraseña campo
+                              MyTextField(
+                                controller: passwordController,
+                                hintText: 'Contraseña',
+                                obscureText: true,
+                                textType: TextInputType
+                                    .text, //Para que la contraseña no se pueda ver
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              //5. Boton iniciar sesción
+                              BotonLogin(),
+                              //6. No se acuerda contraseña
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                '¿Olvidó la contraseña?',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 33, 85, 175)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 25,
