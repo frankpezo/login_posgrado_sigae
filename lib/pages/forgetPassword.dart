@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:login_posgrado_sigae/componentes/TextField.dart';
-import 'package:login_posgrado_sigae/componentes/botonLogin.dart';
-import 'package:login_posgrado_sigae/pages/forgetPassword.dart';
+import 'package:login_posgrado_sigae/componentes/botonPasswordForget.dart';
 
-class LoginPage extends StatelessWidget {
-  //1.TextEditinController
+import '../componentes/TextField.dart';
+
+class ForgetPassword extends StatelessWidget {
   final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,71 +69,42 @@ class LoginPage extends StatelessWidget {
                               //2. Bievenido
                               Container(
                                 padding:
-                                    const EdgeInsets.only(top: 3, right: 40),
+                                    const EdgeInsets.only(top: 3, left: 25),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Iniciar Sesión',
+                                      '¿Has olvidado la contraseña?',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 19),
+                                          fontSize: 17),
                                     ),
                                     SizedBox(
-                                      height: 5,
+                                      height: 10,
                                     ),
-                                    Text('Para acceder a Tramite documentario',
-                                        style: TextStyle(fontSize: 15)),
+                                    Text(
+                                      'Escriba su dirección de correo electrónico \nregistrada de su cuenta de postgradounap.edu.pe.',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
                                   ],
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               //3. Usuario campo
                               MyTextField(
                                 controller: userNameController,
-                                hintText: 'Usuario',
-                                obscureText: false,
+                                hintText: 'correo electrónico',
+                                obscureText: true,
                                 textType: TextInputType.emailAddress,
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              //4. Contraseña campo
-                              MyTextField(
-                                controller: passwordController,
-                                hintText: 'Contraseña',
-                                obscureText: true,
-                                textType: TextInputType
-                                    .text, //Para que la contraseña no se pueda ver
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
+
                               //5. Boton iniciar sesción
-                              BotonLogin(),
+                              BotonOlvidarPassword(),
                               //6. No se acuerda contraseña
                               SizedBox(
                                 height: 10,
-                              ),
-                              InkWell(
-                                child: GestureDetector(
-                                    child: Text(
-                                      '¿Olvidó la contraseña?',
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 33, 85, 175),
-                                          fontSize: 16),
-                                    ),
-                                    onTap: () {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ForgetPassword()),
-                                      );
-                                    }),
                               ),
                             ],
                           ),
@@ -148,24 +117,6 @@ class LoginPage extends StatelessWidget {
                   ),
                   //7. En caso no pueda acceder a su correo
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '¿No tienes acceso a tu cuenta? ',
-                        style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                      ),
-                      Text(
-                        'Comunícate con Soporte',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 33, 85, 175),
-                            fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     '© 2023, Escuela Postgrado UNAP\nReservados todos los derechos ',
                     style: TextStyle(color: Colors.grey[700]),

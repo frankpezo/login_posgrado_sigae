@@ -80,6 +80,9 @@ class ChangePassword extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 19),
                                     ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
                                     Text(
                                       'Para cambiar su contraseña, por favor ingrese su nueva contraseña en el siguiente campo: ',
                                       style: TextStyle(fontSize: 14),
@@ -129,7 +132,9 @@ class ChangePassword extends StatelessWidget {
                   //7. En caso no pueda acceder a su correo
 
                   Text(
-                      '© 2023, Escuela Postgrado Unap \n Todos los derechos reservados'),
+                    '© 2023, Escuela Postgrado UNAP\nReservados todos los derechos ',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
                 ],
               ),
             ),
