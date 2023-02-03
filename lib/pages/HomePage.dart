@@ -6,7 +6,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Hola')),
+      body: Center(
+          child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/pic.png",
+              width: 300,
+            ),
+            Text(
+              'BIENVENIDO',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      )),
     );
   }
 }

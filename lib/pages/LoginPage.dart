@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_posgrado_sigae/componentes/TextField.dart';
 import 'package:login_posgrado_sigae/componentes/botonLogin.dart';
+import 'package:login_posgrado_sigae/pages/Support.dart';
 import 'package:login_posgrado_sigae/pages/forgetPassword.dart';
 
 class LoginPage extends StatelessWidget {
@@ -155,11 +156,21 @@ class LoginPage extends StatelessWidget {
                         '¿No tienes acceso a tu cuenta? ',
                         style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                       ),
-                      Text(
-                        'Comunícate con Soporte',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 33, 85, 175),
-                            fontSize: 14),
+                      InkWell(
+                        child: GestureDetector(
+                            child: Text(
+                              'Comunícate con Soporte',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 33, 85, 175),
+                                  fontSize: 14),
+                            ),
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SupportTeam()),
+                              );
+                            }),
                       ),
                     ],
                   ),
