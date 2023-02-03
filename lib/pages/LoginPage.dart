@@ -11,8 +11,15 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      // backgroundColor: Colors.grey[300],
       body: Container(
+        //Para fondo
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/fondo.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: SafeArea(
@@ -72,7 +79,7 @@ class LoginPage extends StatelessWidget {
                                       'Iniciar Sesión',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                                          fontSize: 19),
                                     ),
                                     Text('Para acceder a Tramite documentario'),
                                   ],
@@ -111,7 +118,8 @@ class LoginPage extends StatelessWidget {
                               Text(
                                 '¿Olvidó la contraseña?',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 33, 85, 175)),
+                                    color: Color.fromARGB(255, 33, 85, 175),
+                                    fontSize: 16),
                               ),
                             ],
                           ),
@@ -120,20 +128,27 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 10,
                   ),
                   //7. En caso no pueda acceder a su correo
 
-                  Text(
-                    '¿No tienes acceso a tu cuenta? ',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  Text(
-                    'Comunicarse con soporte',
-                    style: TextStyle(color: Colors.blueAccent, fontSize: 13),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '¿No tienes acceso a tu cuenta? ',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        'Comunícate con soporte',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 33, 85, 175),
+                            fontSize: 14),
+                      ),
+                    ],
                   ),
 
-                  Text('2023, Escuela Postgrado Unap. Reservado todos lo dee')
+                  Text('© 2023, Escuela Postgrado Unap'),
                 ],
               ),
             ),

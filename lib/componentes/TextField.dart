@@ -17,11 +17,8 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        left: 20,
-        right: 20,
-      ),
-      width: 330,
+      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 325,
       height: 45,
       padding: const EdgeInsets.only(top: 3, left: 15),
       child: TextField(
@@ -29,7 +26,9 @@ class MyTextField extends StatelessWidget {
         controller: this.controller,
         obscureText: this.obscureText,
         keyboardType: textType,
+
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(13),
           enabledBorder:
               OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder: OutlineInputBorder(

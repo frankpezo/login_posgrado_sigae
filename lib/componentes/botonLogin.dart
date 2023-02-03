@@ -13,7 +13,7 @@ class BotonLogin extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(left: 20, right: 10, top: 20),
-        width: 320,
+        width: 310,
         height: 45,
         padding: const EdgeInsets.only(top: 3, left: 10),
         alignment: Alignment.center,
