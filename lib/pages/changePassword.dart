@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:login_posgrado_sigae/componentes/TextField.dart';
-import 'package:login_posgrado_sigae/componentes/botonLogin.dart';
-import 'package:login_posgrado_sigae/pages/HomePage.dart';
-import 'package:login_posgrado_sigae/pages/changePassword.dart';
+import 'package:login_posgrado_sigae/componentes/botonPasswordConfirmar.dart';
 
-class LoginPage extends StatelessWidget {
-  //1.TextEditinController
-  final userNameController = TextEditingController();
+import '../componentes/TextField.dart';
+
+class ChangePassword extends StatelessWidget {
   final passwordController = TextEditingController();
+  final passwordControllerDos = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,17 +70,20 @@ class LoginPage extends StatelessWidget {
                               //2. Bievenido
                               Container(
                                 padding:
-                                    const EdgeInsets.only(top: 3, right: 55),
+                                    const EdgeInsets.only(top: 3, left: 34),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Iniciar Sesión',
+                                      'Cambiar la contraseña',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 19),
                                     ),
-                                    Text('Para acceder a Tramite documentario'),
+                                    Text(
+                                      'Para cambiar su contraseña, por favor ingrese su nueva contraseña en el siguiente campo: ',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -91,18 +92,18 @@ class LoginPage extends StatelessWidget {
                               ),
                               //3. Usuario campo
                               MyTextField(
-                                controller: userNameController,
-                                hintText: 'Usuario',
-                                obscureText: false,
-                                textType: TextInputType.emailAddress,
+                                controller: passwordController,
+                                hintText: 'Nueva contraseña',
+                                obscureText: true,
+                                textType: TextInputType.text,
                               ),
                               SizedBox(
                                 height: 10,
                               ),
                               //4. Contraseña campo
                               MyTextField(
-                                controller: passwordController,
-                                hintText: 'Contraseña',
+                                controller: passwordControllerDos,
+                                hintText: 'Repetir nueva contraseña',
                                 obscureText: true,
                                 textType: TextInputType
                                     .text, //Para que la contraseña no se pueda ver
@@ -111,28 +112,10 @@ class LoginPage extends StatelessWidget {
                                 height: 5,
                               ),
                               //5. Boton iniciar sesción
-                              BotonLogin(),
+                              ConfirmarPassword(),
                               //6. No se acuerda contraseña
                               SizedBox(
                                 height: 10,
-                              ),
-                              InkWell(
-                                child: GestureDetector(
-                                    child: Text(
-                                      '¿Olvidó la contraseña?',
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 33, 85, 175),
-                                          fontSize: 16),
-                                    ),
-                                    onTap: () {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ChangePassword()),
-                                      );
-                                    }),
                               ),
                             ],
                           ),
@@ -145,23 +128,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   //7. En caso no pueda acceder a su correo
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '¿No tienes acceso a tu cuenta? ',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        'Comunícate con soporte',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 33, 85, 175),
-                            fontSize: 14),
-                      ),
-                    ],
-                  ),
-
-                  Text('© 2023, Escuela Postgrado Unap'),
+                  Text(
+                      '© 2023, Escuela Postgrado Unap \n Todos los derechos reservados'),
                 ],
               ),
             ),
