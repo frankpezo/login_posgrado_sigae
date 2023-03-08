@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:login_posgrado_sigae/pages/LoginPage.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  //1. Para traer el nombre del usuario
+  String name;
+  HomePage(this.name);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +24,17 @@ class HomePage extends StatelessWidget {
               width: 300,
             ),
             Text(
-              'BIENVENIDO',
+              'Bienvenido ${widget.name}',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            )
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                child: Text('Cerrar sesión'))
           ],
         ),
       )),

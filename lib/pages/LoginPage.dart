@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:login_posgrado_sigae/componentes/controller.dart';
+import 'package:login_posgrado_sigae/pages/HomePage.dart';
 import 'package:login_posgrado_sigae/pages/Support.dart';
 import 'package:login_posgrado_sigae/pages/forgetPassword.dart';
-
-import 'HomePage.dart';
+import 'package:http/http.dart' as http; //Para consumir la Api
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,9 +14,59 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   //1.TextEditinController
-  final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
+  TextEditingController user = TextEditingController();
+  TextEditingController password = TextEditingController();
   bool obscurePassword = true;
+
+  //2. Creamos el método para consumir la Api
+  Future<void> getDatos() async {
+    if (user.text.isNotEmpty && password.text.isNotEmpty) {
+      //2.1. Hacemos un tryCatch
+      try {
+        //3. Traemos la url
+        Uri url = Uri.parse('http://10.0.2.2/sigaePhp/selectData.php');
+        //3.1. Hacemos la peticiónal body
+        var res = await http
+            .post(url, body: {'user': user.text, 'password': password.text});
+        print(res.body); //Para ver si trae los datos
+
+        //3.2. Convertimos la respuesta a json
+        var response = jsonDecode(res.body);
+        if (response.length != 0) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage(user.text)),
+          );
+          print('Ingresó con exito');
+        } else {
+          print('Falló');
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Color.fromARGB(255, 242, 48, 48),
+            content: Text(
+              'Los datos no coinciden',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            duration: Duration(seconds: 5),
+          ));
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Color.fromARGB(255, 242, 48, 48),
+        content: Text(
+          'Los campos no pueden quedar vacíos',
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        duration: Duration(seconds: 5),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                       const EdgeInsets.only(top: 3, left: 15),
                                   child: TextFormField(
                                     //2. Para acceder
-                                    controller: userNameController,
+                                    controller: user,
                                     obscureText: false,
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
@@ -151,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                                       const EdgeInsets.only(top: 3, left: 15),
                                   child: TextFormField(
                                     //2. Para acceder
-                                    controller: passwordController,
+                                    controller: password,
                                     obscureText: obscurePassword,
                                     keyboardType: TextInputType.text,
                                     validator: (value) {
@@ -195,15 +247,11 @@ class _LoginPageState extends State<LoginPage> {
                                   //1. Para que nos lleve a la página deseada
                                   onTap: () {
                                     setState(() {
-                                      if (formKey.currentState!.validate()) {
-                                        //1.1. Aquí colocaremos para que nos redirecciones a otra parte
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => HomePage()),
-                                        );
-                                      }
+                                      if (formKey.currentState!.validate()) {}
                                     });
+                                    //
+                                    //
+                                    getDatos();
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(

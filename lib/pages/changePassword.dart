@@ -8,11 +8,20 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  final passwordControllerUno = TextEditingController();
+  final passwordUno = TextEditingController();
 
-  final passwordControllerDos = TextEditingController();
+  final passwordDos = TextEditingController();
   bool obscurePassword = true;
   bool obscurePasswordDos = true;
+
+//2. Creamos el json
+  Future<void> changePass($emailV) async {
+    //2.1. Comprobamos que los campos no estén vacíos
+    if (passwordUno.text.isNotEmpty || passwordDos.text.isNotEmpty) {
+    } else {
+      print('Los campos no pueden quedar vacíos');
+    }
+  }
 
   //SnackBar
   void showSnackBar(String title) {
@@ -135,7 +144,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       const EdgeInsets.only(top: 3, left: 15),
                                   child: TextFormField(
                                     //2. Para acceder
-                                    controller: passwordControllerUno,
+                                    controller: passwordUno,
                                     obscureText: obscurePassword,
                                     keyboardType: TextInputType.text,
                                     validator: (value) {
@@ -183,15 +192,15 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       const EdgeInsets.only(top: 3, left: 15),
                                   child: TextFormField(
                                     //2. Para acceder
-                                    controller: passwordControllerDos,
+                                    controller: passwordDos,
                                     obscureText: obscurePasswordDos,
                                     keyboardType: TextInputType.text,
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         return 'Por favor, ingrese la nueva contraseña';
                                       }
-                                      if (passwordControllerUno.text !=
-                                          passwordControllerDos.text) {
+                                      if (passwordUno.text !=
+                                          passwordDos.text) {
                                         return 'Las contraseña no coincide';
                                       }
                                       return null;

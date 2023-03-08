@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:login_posgrado_sigae/componentes/controller.dart';
-import 'changePassword.dart';
+//Para consumir la Api
+import 'package:http/http.dart' as http;
+import 'package:login_posgrado_sigae/pages/changePassword.dart'; //Para consumir la Api
 
 class ForgetPassword extends StatefulWidget {
   @override
@@ -8,7 +12,55 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  final userNameControllerDos = TextEditingController();
+  final email = TextEditingController();
+
+  //2. Creamos el método para consumir la Api
+  Future<void> forgetPass() async {
+    if (email.text.isNotEmpty) {
+      //3. Realizamos un try-catch
+      try {
+        //3.1. Traemos el link
+        Uri url = Uri.parse("http://10.0.2.2/sigaePhp/veryEmail.php");
+        //3.2. Hacemos la petición al body
+        var res = await http.post(url, body: {'email': email.text});
+        print(res.body); //para verificar si trae los datos
+        var response = jsonDecode(res.body);
+        //Condicional
+        if (response.length != 0) {
+          print('Correo verificado');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ChangePassword()),
+          );
+        } else {
+          print('Correo no verificado');
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Color.fromARGB(255, 242, 48, 48),
+            content: Text(
+              'Correo electrónico incorrecto',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            duration: Duration(seconds: 5),
+          ));
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Color.fromARGB(255, 242, 48, 48),
+        content: Text(
+          'Los campos no pueden quedar vacíos',
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        duration: Duration(seconds: 5),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +160,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                       const EdgeInsets.only(top: 3, left: 15),
                                   child: TextFormField(
                                     //2. Para acceder
-                                    controller: userNameControllerDos,
+                                    controller: email,
                                     obscureText: false,
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
@@ -140,16 +192,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                   //1. Para que nos lleve a la página deseada
                                   onTap: () {
                                     setState(() {
-                                      if (formKeyDos.currentState!.validate()) {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChangePassword()),
-                                        );
-                                      }
+                                      if (formKeyDos.currentState!
+                                          .validate()) {}
                                     });
                                     //1.1. Aquí colocaremos para que nos redirecciones a otra parte
+                                    forgetPass();
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
